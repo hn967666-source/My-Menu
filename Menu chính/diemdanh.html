@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Điểm Danh Sinh Viên - Nguyễn Trọng Hiếu</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --success: #10b981;
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
+            --card-bg: rgba(255, 255, 255, 0.07);
+            --card-border: rgba(255, 255, 255, 0.12);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Header section */
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(to right, #818cf8, #c084fc, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 15px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+            color: white;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 18px;
+            height: 18px;
+            background-color: var(--success);
+            border: 3px solid #1e1b4b;
+            border-radius: 50%;
+        }
+
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .info-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .info-content {
+            overflow: hidden;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .info-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-main);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Hobbies Section */
+        .hobbies-section {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .hobbies-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #c084fc;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hobbies-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: #e9d5ff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Attendance Action Box */
+        .attendance-box {
+            background: rgba(79, 70, 229, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .time-display {
+            font-size: 14px;
+            color: #a5b4fc;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .btn-checkin {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+            border: none;
+            padding: 14px 36px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-checkin:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(79, 70, 229, 0.6);
+            background: linear-gradient(135deg, #4f46e5, #4338ca);
+        }
+
+        .btn-checkin:disabled {
+            background: #475569;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* Status Alert */
+        .alert {
+            margin-top: 15px;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            color: #34d399;
+        }
+
+        .footer-greeting {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 15px;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="avatar-wrapper">
+                <div class="avatar">
+                    <i class="fa-solid fa-user-graduate"></i>
+                </div>
+                <div class="status-badge" title="Đang hoạt động"></div>
+            </div>
+            <h1>Hệ Thống Điểm Danh</h1>
+            <p>Thông tin sinh viên & Trạng thái điểm danh</p>
+        </div>
+
+        <!-- Student Info Grid -->
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-user"></i></div>
+                <div class="info-content">
+                    <div class="info-label">Họ và tên</div>
+                    <div class="info-value">Nguyễn Trọng Hiếu</div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-id-card"></i></div>
+                <div class="info-content">
+                    <div class="info-label">Mã số SV</div>
+                    <div class="info-value">241A010595</div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-users"></i></div>
+                <div class="info-content">
+                    <div class="info-label">Lớp học</div>
+                    <div class="info-value">241A0104</div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-cake-candles"></i></div>
+                <div class="info-content">
+                    <div class="info-label">Ngày sinh</div>
+                    <div class="info-value">05/08/2006</div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="info-content">
+                    <div class="info-label">Quê quán / Cư trú</div>
+                    <div class="info-value">An Giang</div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                <div class="info-content">
+                    <div class="info-label">Số điện thoại</div>
+                    <div class="info-value">0345590061</div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div class="info-content">
+                    <div class="info-label">Email</div>
+                    <div class="info-value">hieunguyen@example.com</div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon"><i class="fa-solid fa-globe"></i></div>
+                <div class="info-content">
+                    <div class="info-label">Liên kết cá nhân</div>
+                    <div class="info-value">facebook.com/tronghieu</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hobbies Section -->
+        <div class="hobbies-section">
+            <div class="hobbies-title">
+                <i class="fa-solid fa-heart"></i> Sở thích cá nhân
+            </div>
+            <div class="hobbies-tags">
+                <span class="tag"><i class="fa-solid fa-code"></i> Lập trình Web</span>
+                <span class="tag"><i class="fa-solid fa-gamepad"></i> Chơi Game</span>
+                <span class="tag"><i class="fa-solid fa-music"></i> Nghe nhạc</span>
+                <span class="tag"><i class="fa-solid fa-book"></i> Đọc sách</span>
+            </div>
+        </div>
+
+        <!-- Attendance Action Box -->
+        <div class="attendance-box">
+            <div class="time-display" id="clock">
+                <i class="fa-regular fa-clock"></i> Đang tải thời gian...
+            </div>
+            <button class="btn-checkin" id="checkinBtn" onclick="performCheckIn()">
+                <i class="fa-solid fa-fingerprint"></i> Thực Hiện Điểm Danh
+            </button>
+            <div class="alert alert-success" id="alertBox">
+                <i class="fa-solid fa-circle-check"></i> Điểm danh thành công! Thời gian ghi nhận: <span id="checkinTime"></span>
+            </div>
+        </div>
+
+        <!-- Footer Message -->
+        <div class="footer-greeting">
+            ✨ Chúc các bạn vui vẻ! ✨
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Cập nhật đồng hồ thời gian thực
+        function updateClock() {
+            const now = new Date();
+            const days = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+            const dayName = days[now.getDay()];
+            
+            const dateStr = now.toLocaleDateString('vi-VN', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
+            
+            const timeStr = now.toLocaleTimeString('vi-VN');
+            
+            document.getElementById('clock').innerHTML = 
+                `<i class="fa-regular fa-clock"></i> ${dayName}, ${dateStr} - ${timeStr}`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Xử lý sự kiện điểm danh
+        function performCheckIn() {
+            const btn = document.getElementById('checkinBtn');
+            const alertBox = document.getElementById('alertBox');
+            const checkinTime = document.getElementById('checkinTime');
+            
+            const now = new Date();
+            const timeFormatted = now.toLocaleTimeString('vi-VN') + ' - ' + now.toLocaleDateString('vi-VN');
+            
+            checkinTime.textContent = timeFormatted;
+            
+            // Đổi trạng thái nút bấm
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> Đã Điểm Danh';
+            btn.style.background = '#10b981';
+            
+            // Hiển thị thông báo thành công
+            alertBox.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accuracy & Performance Stats</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f131a;
+        }
+
+        /* Nền hiệu ứng đường lưới (Grid pattern background) */
+        .grid-bg {
+            background-size: 32px 32px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        }
+    </style>
+</head>
+<body class="grid-bg min-h-screen flex items-center justify-center p-4 antialiased text-slate-200">
+
+    <!-- Container chính chứa 2 box -->
+    <div class="w-full max-w-lg flex flex-col gap-4">
+
+        <!-- 1. Accuracy Card -->
+        <div class="bg-[#161b26]/80 border border-slate-800/80 rounded-2xl p-5 shadow-xl backdrop-blur-sm">
+            <!-- Header -->
+            <div class="flex items-center gap-1.5 mb-4">
+                <h2 class="text-sm font-semibold text-slate-100">Accuracy</h2>
+                <!-- Info Icon -->
+                <svg class="w-3.5 h-3.5 text-slate-500 cursor-pointer hover:text-slate-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                    <path stroke-linecap="round" stroke-width="2" d="M12 16v-4m0-4h.01"/>
+                </svg>
+            </div>
+
+            <!-- Custom Progress Bar Container -->
+            <div class="relative w-full h-4 bg-slate-800 rounded-full overflow-hidden flex items-center p-0.5">
+                <!-- Thanh màu xanh (95%) -->
+                <div class="h-full bg-[#10b981] rounded-l-full flex items-center justify-end pr-1.5" style="width: 95%;">
+                    <!-- Phần trăm badge nhỏ bên trong -->
+                    <span class="text-[10px] font-bold text-slate-950 leading-none bg-emerald-300 px-1 py-0.5 rounded">95%</span>
+                </div>
+                <!-- Thanh màu đỏ (5%) -->
+                <div class="h-full bg-[#ef4444] rounded-r-full" style="width: 5%;"></div>
+            </div>
+        </div>
+
+        <!-- 2. Performance Stats Card -->
+        <div class="bg-[#161b26]/80 border border-slate-800/80 rounded-2xl p-5 shadow-xl backdrop-blur-sm">
+            <!-- Header & Total Questions -->
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-sm font-semibold text-slate-100">Performance Stats</h2>
+                <span class="text-xs text-slate-400 font-medium">100 questions</span>
+            </div>
+
+            <!-- Badges List -->
+            <div class="flex flex-wrap items-center gap-2.5">
+                
+                <!-- Badge Correct -->
+                <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#064e3b]/60 text-[#34d399] border border-[#059669]/30">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <span>95 Correct</span>
+                </div>
+
+                <!-- Badge Incorrect -->
+                <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#7f1d1d]/50 text-[#f87171] border border-[#dc2626]/30">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span>5 Incorrect</span>
+                </div>
+
+                <!-- Badge Time/Question -->
+                <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#1e3a8a]/50 text-[#60a5fa] border border-[#2563eb]/30">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>14 s time/question</span>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
